@@ -1,0 +1,53 @@
+[
+  {
+    "id": "TC-SEARCH-PAGINATION-001",
+    "title": "Navigating to the next page of search results shows the next set of items",
+    "type": "UI",
+    "feature": "search",
+    "flow": "pagination",
+    "priority": "Medium",
+    "tags": ["regression"],
+    "preconditions": [],
+    "test_data": {"query": "glass"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Note the items displayed on page 1",
+      "Click the \"next page\" / page 2 pagination control"
+    ],
+    "expected_result": "Page 2 loads showing a different, subsequent set of results (no duplication of page 1 items); the pagination control indicates page 2 is active.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-PAGINATION-002",
+    "title": "Last page of search results shows no \"next\" control",
+    "type": "UI",
+    "feature": "search",
+    "flow": "pagination",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {"query": "glass"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Navigate to the last available page via the pagination controls"
+    ],
+    "expected_result": "The \"next\" control is disabled or absent on the last page; results shown are the final remaining items (item count may be less than a full page).",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-PAGINATION-003",
+    "title": "Direct navigation to an out-of-range page number is handled gracefully",
+    "type": "UI",
+    "feature": "search",
+    "flow": "pagination",
+    "priority": "Low",
+    "tags": ["boundary", "negative"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "page": 9999},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass&paged=9999 (or the site's equivalent page parameter)"
+    ],
+    "expected_result": "Page loads without a server error; displays either a \"no results\" state, a redirect to the last valid page, or an empty results list — no crash/HTTP 500.",
+    "linked_requirement": ""
+  }
+]
