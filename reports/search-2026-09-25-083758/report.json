@@ -1,0 +1,13 @@
+[
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-003",
+    "status": "fail",
+    "actual_result": "Page loaded without error (title 'You searched for - Skyline', 0 console errors, 39 warnings). However, the whitespace-only query returned heading '4 Search results for \" \"' with only 4 results (FAQ, History, The Best Glassboard Marker, Sustainability) instead of falling back to the full site content set, as an empty query does (716 items observed for TC-SEARCH-RESULTSPAGE-002). Result was consistent across 2 attempts (same page, same 4 results both times).",
+    "expected_result": "Page loads without error; result set matches the same fallback behavior as an empty query (no crash, no unhandled exception).",
+    "error_message": "Result count mismatch: whitespace-only query returned 4 results instead of the full-content fallback (~716 items) expected to match empty-query behavior.",
+    "screenshot": "screenshots/TC-SEARCH-RESULTSPAGE-003.png",
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-25T08:37:58Z"
+  }
+]
