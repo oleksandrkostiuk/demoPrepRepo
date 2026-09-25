@@ -1,0 +1,24 @@
+[
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-001",
+    "status": "pass",
+    "actual_result": "Page displayed heading '217 Search results for “glass”' with relevant results listed.",
+    "expected_result": "Page displays a list of results relevant to \"glass\" with a result count heading (e.g. \"N Search results\").",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-25T11:23:33Z"
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-003",
+    "status": "pass",
+    "actual_result": "Page loaded without error, displaying heading '4 Search results for “ ”'. No crash or unhandled exception observed.",
+    "expected_result": "Page loads without error; result set matches the same fallback behavior as an empty query (no crash, no unhandled exception).",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-25T11:23:40Z"
+  }
+]
