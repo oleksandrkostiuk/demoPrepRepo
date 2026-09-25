@@ -1,0 +1,20 @@
+[
+  {
+    "id": "TC-SEARCH-ALLRESULTSNAV-001",
+    "title": "Clicking \"All results\" in the autocomplete dropdown navigates to the full results page with the same query",
+    "type": "UI",
+    "feature": "search",
+    "flow": "all-results-nav",
+    "priority": "Medium",
+    "tags": ["smoke", "regression"],
+    "preconditions": [],
+    "test_data": {"search_term": "gla"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/",
+      "Type \"gla\" into the header search input, wait for the autocomplete dropdown to appear",
+      "Click the \"All results\" link in the dropdown"
+    ],
+    "expected_result": "Browser navigates to the full search results page (?s=gla) and displays the same result set as a direct search for \"gla\".",
+    "linked_requirement": ""
+  }
+]
