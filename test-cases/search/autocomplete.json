@@ -1,0 +1,113 @@
+[
+  {
+    "id": "TC-SEARCH-AUTOCOMPLETE-001",
+    "title": "Autocomplete dropdown does not appear for a 1-character query",
+    "type": "UI",
+    "feature": "search",
+    "flow": "autocomplete",
+    "priority": "Low",
+    "tags": ["boundary", "negative"],
+    "preconditions": [],
+    "test_data": {"search_term": "g"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/",
+      "Click the header search input to focus it",
+      "Type \"g\" using real keystroke events (not programmatic fill)"
+    ],
+    "expected_result": "No autocomplete dropdown appears below the search input.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-AUTOCOMPLETE-002",
+    "title": "Autocomplete dropdown does not appear for a 2-character query",
+    "type": "UI",
+    "feature": "search",
+    "flow": "autocomplete",
+    "priority": "Low",
+    "tags": ["boundary", "negative"],
+    "preconditions": [],
+    "test_data": {"search_term": "gl"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/",
+      "Click the header search input to focus it",
+      "Type \"gl\" using real keystroke events"
+    ],
+    "expected_result": "No autocomplete dropdown appears below the search input.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-AUTOCOMPLETE-003",
+    "title": "Autocomplete dropdown appears with suggestions for a 3-character query",
+    "type": "UI",
+    "feature": "search",
+    "flow": "autocomplete",
+    "priority": "High",
+    "tags": ["smoke", "regression"],
+    "preconditions": [],
+    "test_data": {"search_term": "gla"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/",
+      "Click the header search input to focus it",
+      "Type \"gla\" using real keystroke events"
+    ],
+    "expected_result": "Autocomplete dropdown appears showing matching suggestions plus an \"All results\" link.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-AUTOCOMPLETE-004",
+    "title": "Autocomplete suggestion list is capped at approximately 7 items plus an \"All results\" link",
+    "type": "UI",
+    "feature": "search",
+    "flow": "autocomplete",
+    "priority": "Medium",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {"search_term": "glass"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/",
+      "Click the header search input to focus it",
+      "Type \"glass\" using real keystroke events",
+      "Count the suggestion items rendered in the dropdown"
+    ],
+    "expected_result": "Dropdown shows no more than ~7 suggestion items, followed by a single \"All results\" link at the bottom of the dropdown.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-AUTOCOMPLETE-005",
+    "title": "Autocomplete suggestions update as the user continues typing",
+    "type": "UI",
+    "feature": "search",
+    "flow": "autocomplete",
+    "priority": "Medium",
+    "tags": ["regression"],
+    "preconditions": [],
+    "test_data": {"search_term_sequence": ["gla", "glas"]},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/",
+      "Click the header search input to focus it",
+      "Type \"gla\" using real keystroke events and record the suggestions shown",
+      "Continue typing to \"glas\" without clearing the field"
+    ],
+    "expected_result": "Suggestion list refreshes to reflect the updated, narrower query each time, with no page reload required.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-AUTOCOMPLETE-006",
+    "title": "Autocomplete dropdown closes when the search input is cleared",
+    "type": "UI",
+    "feature": "search",
+    "flow": "autocomplete",
+    "priority": "Low",
+    "tags": ["regression"],
+    "preconditions": [],
+    "test_data": {"search_term": "gla"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/",
+      "Click the header search input to focus it",
+      "Type \"gla\" using real keystroke events and confirm the dropdown is open",
+      "Clear the input field completely"
+    ],
+    "expected_result": "Autocomplete dropdown closes/hides.",
+    "linked_requirement": ""
+  }
+]

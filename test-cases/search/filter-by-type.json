@@ -1,0 +1,154 @@
+[
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-001",
+    "title": "Filtering search results by \"project\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "project"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"project\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"project\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-002",
+    "title": "Filtering search results by \"product\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "product"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"product\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"product\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-003",
+    "title": "Filtering search results by \"case_study\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "case_study"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"case_study\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"case_study\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-004",
+    "title": "Filtering search results by \"pattern\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "pattern"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"pattern\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"pattern\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-005",
+    "title": "Filtering search results by \"color\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "color"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"color\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"color\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-006",
+    "title": "Filtering search results by \"document\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "document"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"document\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"document\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-007",
+    "title": "Filtering search results by \"post\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "post"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"post\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"post\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-008",
+    "title": "Filtering search results by \"page\" post type returns a subset of results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["smoke"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "page"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Apply the \"page\" post type filter"
+    ],
+    "expected_result": "Result list updates to show only items of type \"page\"; result count is less than or equal to the unfiltered \"all results\" count.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-FILTERBYTYPE-009",
+    "title": "Invalid/unknown post_type filter value falls back to showing all results",
+    "type": "UI",
+    "feature": "search",
+    "flow": "filter-by-type",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": [],
+    "test_data": {"query": "glass", "post_type": "bogus_type"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass with an unrecognized post_type filter value applied (e.g. via direct URL parameter manipulation)"
+    ],
+    "expected_result": "Page does not error; falls back to displaying the unfiltered \"all results\" set for the query, matching TC-SEARCH-RESULTSPAGE-001 behavior.",
+    "linked_requirement": ""
+  }
+]

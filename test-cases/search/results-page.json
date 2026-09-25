@@ -1,0 +1,135 @@
+[
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-001",
+    "title": "Full search results page displays matching results for a valid query",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "High",
+    "tags": ["smoke", "regression"],
+    "preconditions": [],
+    "test_data": {"query": "glass"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass",
+      "Wait for the results page to load"
+    ],
+    "expected_result": "Page displays a list of results relevant to \"glass\" with a result count heading (e.g. \"N Search results\").",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-002",
+    "title": "Empty query on results page returns all site content instead of an error",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "Medium",
+    "tags": ["boundary", "negative"],
+    "preconditions": [],
+    "test_data": {"query": ""},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s="
+    ],
+    "expected_result": "Page loads without error and displays the full content set (716 items observed at exploration time), not a validation error or blank state.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-003",
+    "title": "Whitespace-only query is handled without error",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "Medium",
+    "tags": ["boundary", "negative"],
+    "preconditions": [],
+    "test_data": {"query": "   "},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=%20%20%20"
+    ],
+    "expected_result": "Page loads without error; result set matches the same fallback behavior as an empty query (no crash, no unhandled exception).",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-004",
+    "title": "No-match query displays \"0 Search results\" and \"No results found\"",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "High",
+    "tags": ["smoke", "negative"],
+    "preconditions": [],
+    "test_data": {"query": "zzznonexistentqueryzzz"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=zzznonexistentqueryzzz"
+    ],
+    "expected_result": "Page displays a \"0 Search results\" heading and a \"No results found\" message; no result items are rendered.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-005",
+    "title": "XSS payload in search query is safely escaped and not executed",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "Critical",
+    "tags": ["security", "regression"],
+    "preconditions": [],
+    "test_data": {"query": "<script>alert(1)</script>"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=%3Cscript%3Ealert(1)%3C%2Fscript%3E",
+      "Observe the rendered page and check whether any JS alert/execution occurs"
+    ],
+    "expected_result": "Payload is reflected as inert, escaped text (e.g. in the \"no results\" message or query echo); no script executes and no alert dialog appears.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-006",
+    "title": "SQL-injection-style payload in search query is handled safely",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "Critical",
+    "tags": ["security", "negative"],
+    "preconditions": [],
+    "test_data": {"query": "' OR 1=1 --"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=%27%20OR%201%3D1%20--"
+    ],
+    "expected_result": "Page loads normally showing either no results or a safely filtered result set; no database error, stack trace, or evidence of query manipulation (e.g. no unintended full-content dump caused by the injection itself).",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-007",
+    "title": "Search is case-insensitive for equivalent query terms",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "Medium",
+    "tags": ["regression"],
+    "preconditions": [],
+    "test_data": {"query_a": "glass", "query_b": "GLASS"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=glass and record the result count and item set",
+      "Navigate to https://dev.skyline.glass/?s=GLASS and record the result count and item set"
+    ],
+    "expected_result": "Both queries return the same result count and the same set of items.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-RESULTSPAGE-008",
+    "title": "Very long query string and special characters are handled without error",
+    "type": "UI",
+    "feature": "search",
+    "flow": "results-page",
+    "priority": "Medium",
+    "tags": ["boundary", "negative"],
+    "preconditions": [],
+    "test_data": {"long_query": "500+ character random alphanumeric string", "special_chars_query": "!@#$%^&*()_+{}:|<>?"},
+    "steps": [
+      "Navigate to https://dev.skyline.glass/?s=<500-char string, URL-encoded>",
+      "Observe the page response",
+      "Repeat step 1-2 with the special-character string in place of the long string"
+    ],
+    "expected_result": "Page loads without a server error (no HTTP 500) for either input; displays either relevant results or a graceful \"no results\" state.",
+    "linked_requirement": ""
+  }
+]
