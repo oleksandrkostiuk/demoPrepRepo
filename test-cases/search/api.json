@@ -1,0 +1,99 @@
+[
+  {
+    "id": "TC-SEARCH-API-001",
+    "title": "POST to ajax_search.php with a valid search term returns matching results",
+    "type": "API",
+    "feature": "search",
+    "flow": "api",
+    "priority": "High",
+    "tags": ["smoke", "regression"],
+    "preconditions": [],
+    "test_data": {"search_val": "glass"},
+    "steps": [
+      "Send a POST request to https://dev.skyline.glass/wp-content/themes/skyline/ajax_search.php with search_val=glass",
+      "Inspect the response"
+    ],
+    "expected_result": "HTTP 200 response containing a result fragment with matching search suggestions for \"glass\".",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-API-002",
+    "title": "POST to ajax_search.php with missing search_val parameter is handled gracefully",
+    "type": "API",
+    "feature": "search",
+    "flow": "api",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": [],
+    "test_data": {},
+    "steps": [
+      "Send a POST request to ajax_search.php with the search_val parameter omitted entirely"
+    ],
+    "expected_result": "Endpoint responds without a server error (no HTTP 500); returns an empty result set or a defined error response.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-API-003",
+    "title": "POST to ajax_search.php with empty search_val parameter is handled gracefully",
+    "type": "API",
+    "feature": "search",
+    "flow": "api",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": [],
+    "test_data": {"search_val": ""},
+    "steps": [
+      "Send a POST request to ajax_search.php with search_val= (empty string)"
+    ],
+    "expected_result": "HTTP 200 response with an empty result set or graceful fallback; no server error.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-API-004",
+    "title": "POST to ajax_search.php with missing type parameter is handled gracefully",
+    "type": "API",
+    "feature": "search",
+    "flow": "api",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": [],
+    "test_data": {"search_val": "glass"},
+    "steps": [
+      "Send a POST request to ajax_search.php with search_val=glass and the type parameter omitted"
+    ],
+    "expected_result": "Endpoint responds without a server error; falls back to a default type/all-types behavior.",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-API-005",
+    "title": "ajax_search.php responds successfully without authentication",
+    "type": "API",
+    "feature": "search",
+    "flow": "api",
+    "priority": "Medium",
+    "tags": ["regression"],
+    "preconditions": [],
+    "test_data": {"search_val": "glass", "auth": "none"},
+    "steps": [
+      "Send a POST request to ajax_search.php with a valid search_val, no authentication headers or cookies"
+    ],
+    "expected_result": "HTTP 200 response with valid results, confirming the endpoint requires no authentication (consistent with Explorer findings — no auth surface exists for Search).",
+    "linked_requirement": ""
+  },
+  {
+    "id": "TC-SEARCH-API-006",
+    "title": "XSS payload in search_val parameter is safely handled by the API",
+    "type": "API",
+    "feature": "search",
+    "flow": "api",
+    "priority": "Critical",
+    "tags": ["security"],
+    "preconditions": [],
+    "test_data": {"search_val": "<script>alert(1)</script>"},
+    "steps": [
+      "Send a POST request to ajax_search.php with search_val=<script>alert(1)</script>"
+    ],
+    "expected_result": "HTTP 200 response; the payload is not executed and is either escaped in the response body or excluded from results; no server error.",
+    "linked_requirement": ""
+  }
+]
